@@ -11,9 +11,11 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 //adicionando classe pessoa
 class Pessoa{
+
   double peso = 0.0;
   double altura = 0.0;
   int genero = 0;
+
   double calcularIMC(){
     return this.peso / (this.altura/100 * this.altura/100);
   }
@@ -23,8 +25,8 @@ class Pessoa{
 //cor do resultado  
     Color cor;
     if (this.genero == 0){
+
       if (imc < 20.7)
-      
         cor = Colors.blue;
       else if (imc >= 20.7 && imc <= 26.4)
         cor = Colors.green;
@@ -35,7 +37,9 @@ class Pessoa{
       else
         cor = Colors.red;
     }
+
     else{
+
       if (imc < 19.1)
         cor = Colors.blue;
       else if (imc >= 19.1 && imc <= 25.8)
@@ -53,7 +57,6 @@ class Pessoa{
   String classificar(double imc){
     String _result = '';
 
-   
 //peso do homem
     if (this.genero == 0){
 
@@ -67,6 +70,7 @@ class Pessoa{
         _result += "Acima do peso";
       else
         _result += "Obesidade";
+
     }
     else{
 //peso da mulher
@@ -86,26 +90,23 @@ class Pessoa{
 }
 
 void main() => runApp(MaterialApp(
+
   home: Home(),
-  debugShowCheckedModeBanner: false,
-  //baner de debug
-));
+  debugShowCheckedModeBanner: false,//baner de debug
+  
+  ));
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
-
-
-
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin
  {
 
   TabController controller;
-
-  TextEditingController _weightController = TextEditingController();
-  TextEditingController _heightController = TextEditingController();
+  TextEditingController _weightController = TextEditingController();//controla o peso
+  TextEditingController _heightController = TextEditingController();//controla a altura
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   
 
@@ -118,8 +119,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
 
 
   @override
-  void initState() {
-    //onde o app inicia.
+  void initState() { //onde o app inicia.
     super.initState();
     controller = new TabController(vsync: this, length: 2);
     resetFields();
@@ -136,15 +136,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
     _weightController.text = '';
     _heightController.text = '';
     isResultOnScreen = false;
-    setState(() {
+
+    setState(() {//altera a tela
       imcMessage = 'Insira seus dados.';
       imcNumber = "";
       imcColor = Colors.grey;
     });
   }
 
-  void _handleGenderCalculation(int value){
-
+  void _calculodoGenero(int value){
 
     setState((){
       //mudança de tela
@@ -199,6 +199,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
             )
           ],
         ),
+
+
+
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
             padding: EdgeInsets.all(20.0),
@@ -210,30 +213,28 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                       child: Text('Gênero:',
-
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400,
                             color: Colors.grey),
                       ),
                     ),
-
                     Row( 
                        //escolha de genero
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Radio(value: 0,
                           groupValue: usuario.genero,
-                          onChanged: _handleGenderCalculation,
+                          onChanged: _calculodoGenero,
                         ),
                         Text('Masculino'),
                         Radio(value: 1,
                           groupValue: usuario.genero,
-                          onChanged: _handleGenderCalculation,
+                          onChanged:  _calculodoGenero,
                           activeColor: Colors.red,
                         ),
                         Text('Feminino'),
-
                       ],),
+
 
                     insert("Altura (cm)", "Digite uma altura!", _heightController),
                     Padding(padding: EdgeInsets.only(top: 8.0),),
@@ -254,6 +255,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
                         child: Text(imcMessage, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: imcColor, ))
                     ),
 
+
                       new LinearPercentIndicator(
                       width: 370.0,
                       lineHeight: 2.0,
@@ -263,27 +265,22 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
                       progressColor: imcColor,
                       ),
 
-
                     Padding(
                         padding: EdgeInsets.symmetric(vertical: 36.0),
+
+
                         child: Container(
                             height: 50,
-                  
                             child: RaisedButton(
-                              
-                              color: imcColor,
-                              //cor do botão
+                              color: imcColor, //cor do botão
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                              
-                              onPressed: () {
-                                
-                                // resultados 
+            
+                              onPressed: () {// resultados 
 
                                 if (_formKey.currentState.validate()) {
                                   usuario.altura = double.parse(_heightController.text);
                                   usuario.peso = double.parse(_weightController.text);
                                   double resultado = usuario.calcularIMC();
-                                  
                                   setState((){
                                     imcMessage = usuario.classificar(resultado);
                                     imcNumber = usuario.calcularIMC().toStringAsPrecision(3);
@@ -292,21 +289,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
                                   });
                                 }
                               },
+                             
                               child: Text('CALCULAR', style: TextStyle(color: Colors.white)),
                               
                               
-                            ))),
-
-           
-
-
+                            ),
+                            ),
+                            ),
                 ],
-
-
-
                 ),
                 ),
                 ),
                 );
-  }
-}
+                }
+                }
