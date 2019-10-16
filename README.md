@@ -8,12 +8,11 @@ Aplicativo de uma calculadora de IMC criado para disciplina de Programação Mob
 	<img src="https://lh3.googleusercontent.com/-CD8UBM67GGWboN56JZ_Ywz-BKaVYmra_qtqOT2soOR-4b9djfrGn76N6N3Mas_IdA=w1920-h920-rw" height="400"/>
 </p>
 
-## Desafio para aula
 
-Dupla: 
+## Dupla: 
 
-### Agner Gomes
-### Matheus Estoque Nunes
+###### Agner Gomes
+###### Matheus Estoque Nunes
 
 - [x]  Adicionar botões (Toggle ou Radio button) para escolha de gênero;
 - [x]  Corrigir o calculo de acordo com o gênero (masculino e feminino);
