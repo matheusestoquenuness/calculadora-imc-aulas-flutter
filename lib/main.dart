@@ -9,19 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 
+//adicionando classe pessoa
 class Pessoa{
   double peso = 0.0;
   double altura = 0.0;
   int genero = 0;
-
   double calcularIMC(){
     return this.peso / (this.altura/100 * this.altura/100);
   }
-
   Color buscarCorIdeal(double imc
-) {
-    
-   
+) {  
+
+//cor do resultado  
     Color cor;
     if (this.genero == 0){
       if (imc < 20.7)
@@ -55,7 +54,7 @@ class Pessoa{
     String _result = '';
 
    
-
+//peso do homem
     if (this.genero == 0){
 
       if (imc < 20.7)
@@ -70,7 +69,7 @@ class Pessoa{
         _result += "Obesidade";
     }
     else{
-
+//peso da mulher
       if (imc < 19.1)
         _result += "Abaixo do peso";
       else if (imc >= 19.1 && imc <= 25.8)
@@ -89,6 +88,7 @@ class Pessoa{
 void main() => runApp(MaterialApp(
   home: Home(),
   debugShowCheckedModeBanner: false,
+  //baner de debug
 ));
 
 class Home extends StatefulWidget {
@@ -119,6 +119,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
 
   @override
   void initState() {
+    //onde o app inicia.
     super.initState();
     controller = new TabController(vsync: this, length: 2);
     resetFields();
@@ -131,6 +132,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
   }
 
   void resetFields() {
+    //resetar os campos
     _weightController.text = '';
     _heightController.text = '';
     isResultOnScreen = false;
@@ -145,6 +147,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
 
 
     setState((){
+      //mudança de tela
       if (isResultOnScreen){
         usuario.genero = value;
 
@@ -158,7 +161,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
     usuario.genero = value;
   }
 
-  TextFormField customMeme(String label, String warning, TextEditingController controller) {
+  TextFormField insert(String label, String warning, TextEditingController controller) {
+    //campo de entrada
 
     return TextFormField(
       keyboardType: TextInputType.number,
@@ -176,6 +180,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+    // app bar* nome e cor do app
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -212,7 +217,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
                       ),
                     ),
 
-                    Row(
+                    Row( 
+                       //escolha de genero
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Radio(value: 0,
@@ -229,18 +235,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
 
                       ],),
 
-                    customMeme("Altura (cm)", "Digite uma altura!", _heightController),
+                    insert("Altura (cm)", "Digite uma altura!", _heightController),
                     Padding(padding: EdgeInsets.only(top: 8.0),),
-                    customMeme("Peso (kg)", "Digite um peso!", _weightController),
+                    insert("Peso (kg)", "Digite um peso!", _weightController),
 
 
 
                     Padding(
+                      //espaçamentos 
                         padding: EdgeInsets.only(top: 8.0),
                         child: Text(imcNumber, textAlign: TextAlign.center, style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold))
                     ),
 
                     Padding(
+                      //espaçamentos 
                         padding: EdgeInsets.all(8),
 
                         child: Text(imcMessage, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: imcColor, ))
@@ -264,10 +272,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin
                             child: RaisedButton(
                               
                               color: imcColor,
+                              //cor do botão
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               
                               onPressed: () {
                                 
+                                // resultados 
 
                                 if (_formKey.currentState.validate()) {
                                   usuario.altura = double.parse(_heightController.text);
